@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Conference Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fff;
+      color: #111;
+      padding: 20px;
+    }
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      border: 1px solid #999;
+      padding: 18px;
+      box-sizing: border-box;
+    }
+    h2 { text-align: left; margin-top: 0; }
+    label { display: block; margin-top: 12px; font-weight: bold; }
+    .hint { font-weight: normal; font-size: 0.95rem; color: #333; }
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 6px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 1rem;
+    }
+    .inline { display:inline-block; margin-right: 18px; margin-top:8px; }
+    fieldset {
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+    .checkbox-list, .radio-list {
+      margin-top: 6px;
+    }
+    textarea { min-height: 100px; resize: vertical; }
+    .buttons { margin-top: 14px; }
+    button {
+      padding: 8px 14px;
+      font-size: 0.95rem;
+      border-radius: 4px;
+      border: 1px solid #666;
+      cursor: pointer;
+      background: #eee;
+    }
+    button[type="submit"] { background: #2f8bd8; color: #fff; border-color: #196fb6; }
+    .small-note { font-size:0.9rem; color:#666; margin-top:4px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Conference Registration Form</h2>
+
+    <!-- Use a simple action so the form can be tested locally. -->
+    <form id="regForm" method="get" action="#">
+      <!-- Full Name (required) -->
+      <label for="fullname">Full Name:</label>
+      <input id="fullname" name="fullname" type="text" placeholder="Enter your full name" required />
+
+      <!-- Email Address (required) -->
+      <label for="email">Email Address:</label>
+      <input id="email" name="email" type="email" placeholder="Enter your email address" required />
+
+      <!-- Age (required, min 18 max 99) -->
+      <label for="age">Age:</label>
+      <input id="age" name="age" type="number" min="18" max="99" value="18" required />
+      <div class="small-note">Minimum age 18, maximum 99.</div>
+
+      <!-- Gender -->
+      <label>Gender:</label>
+      <div class="radio-list">
+        <label class="inline"><input type="radio" name="gender" value="male" /> Male</label>
+        <label class="inline"><input type="radio" name="gender" value="female" /> Female</label>
+      </div>
+
+      <!-- Country -->
+      <label for="country">Country of Residence:</label>
+      <select id="country" name="country">
+        <option value="Malaysia" selected>Malaysia</option>
+        <option value="Singapore">Singapore</option>
+        <option value="Indonesia">Indonesia</option>
+        <option value="Thailand">Thailand</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <!-- Areas of Interest (checkboxes) -->
+      <label>Areas of Interest:</label>
+      <div class="checkbox-list">
+        <label><input type="checkbox" name="interest" value="software" /> Software Development</label><br/>
+        <label><input type="checkbox" name="interest" value="data" /> Data Science</label><br/>
+        <label><input type="checkbox" name="interest" value="cyber" /> Cybersecurity</label><br/>
+        <label><input type="checkbox" name="interest" value="ai" /> Artificial Intelligence</label>
+      </div>
+
+      <!-- Experience Level -->
+      <label>Experience Level:</label>
+      <div class="radio-list">
+        <label class="inline"><input type="radio" name="experience" value="beginner" /> Beginner</label>
+        <label class="inline"><input type="radio" name="experience" value="intermediate" /> Intermediate</label>
+        <label class="inline"><input type="radio" name="experience" value="advanced" /> Advanced</label>
+      </div>
+
+      <!-- Comments -->
+      <label for="comments">Comments or Questions:</label>
+      <textarea id="comments" name="comments" placeholder="Any comments or questions?"></textarea>
+
+      <!-- Buttons -->
+      <div class="buttons">
+        <button type="submit">Register</button>
+        <button type="reset">Reset</button>
+      </div>
+    </form>
+
+    <!-- Optional: small script to show form data on submission for local testing -->
+    <script>
+      document.getElementById('regForm').addEventListener('submit', function (e) {
+        e.preventDefault(); // prevent any real submission
+        // show collected values in a simple alert (for testing)
+        const form = e.target;
+        const data = new FormData(form);
+        let out = '';
+        for (const [k, v] of data.entries()) {
+          out += k + ': ' + v + '\n';
+        }
+        if (!out) out = 'Form submitted (no values).';
+        alert('Form submitted (local demo):\n\n' + out);
+      });
+    </script>
+  </div>
+</body>
+</html>
+
